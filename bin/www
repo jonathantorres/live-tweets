@@ -1,9 +1,21 @@
 #!/usr/bin/env node
-var debug = require('debug')('Live-Tweets');
-var app = require('../app');
+
+var debug = require('debug')('Live-Tweets'),
+    app = require('../app'),
+    SocketIO = require('socket.io'),
+    LiveTweets = require('../lib/live-tweets'),
+    io = new SocketIO(),
+    liveTweets;
 
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
+    debug('Express server listening on port ' + server.address().port);
+});
+
+io.attach(server);
+
+io.on('connection', function (socket) {
+    liveTweets = new LiveTweets(socket);
+    liveTweets.init();
 });
