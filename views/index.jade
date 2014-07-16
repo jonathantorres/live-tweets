@@ -3,7 +3,7 @@ extends layout
 block content
 
   h1 Live tweets from #nodejs
-  table(class="table table-bordered")
+  table(class="table table-bordered live-tweets")
     thead
         tr
             th(width="15%") Image
@@ -12,6 +12,7 @@ block content
 
     tbody
         tr
-            td Value
-            td Value
-            td Value
+            td
+                img(src="http://placekitten.com/75/75" width="75" height="75")
+            td @fulano
+            td This is awesome dude
