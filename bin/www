@@ -4,6 +4,7 @@ var debug = require('debug')('Live-Tweets'),
     app = require('../app'),
     SocketIO = require('socket.io'),
     LiveTweets = require('../lib/live-tweets'),
+    db = require('../lib/db'),
     io = new SocketIO(),
     liveTweets;
 
@@ -14,6 +15,8 @@ var server = app.listen(app.get('port'), function() {
 });
 
 io.attach(server);
+
+db.start();
 
 io.on('connection', function (socket) {
     liveTweets = new LiveTweets(socket);
