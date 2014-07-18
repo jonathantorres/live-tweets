@@ -1,4 +1,5 @@
-var socket = io.connect('http://localhost'),
+var serverName = $('body').data('io-host'),
+    socket = io.connect(serverName),
     liveTweetsTable = $('.live-tweets');
 
 socket.on('tweet', function (data) {
