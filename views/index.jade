@@ -11,8 +11,9 @@ block content
             th Tweet
 
     tbody
-        tr
-            td
-                img(src="http://placekitten.com/75/75" width="75" height="75")
-            td @fulano
-            td This is awesome dude
+        each tweet in tweets
+            tr
+                td
+                    img(src="#{tweet.profileImage}" width="75" height="75")
+                td @#{tweet.username}
+                td #{tweet.text}

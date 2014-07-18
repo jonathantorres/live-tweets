@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+    Tweet = require('../lib/models/Tweet'),
+    router = express.Router(),
+    viewData = {};
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Live Tweets' });
+    viewData.title = 'Live Tweets';
+
+    Tweet.find({}, null, { sort : { date : 'desc' } }, function (err, tweets) {
+        viewData.tweets = tweets;
+        res.render('index', viewData);
+    });
 });
 
 module.exports = router;
